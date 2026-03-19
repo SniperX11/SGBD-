@@ -1,0 +1,5 @@
+# PostgreSQL connection settings
+# Copy this file to db.properties and fill in your actual credentials.
+db.url=jdbc:postgresql://localhost:5432/sgbd_lab1
+db.username=postgres
+db.password=your_password_here
