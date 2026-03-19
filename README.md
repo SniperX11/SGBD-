@@ -10,7 +10,7 @@ All database access uses plain JDBC with `PreparedStatement` – no ORM.
 | Tool | Minimum version |
 |------|----------------|
 | Java JDK | 11 |
-| Apache Maven | 3.6 |
+| Gradle Wrapper | bundled (`gradlew` / `gradlew.bat`) |
 | PostgreSQL | 12 |
 
 ---
@@ -65,14 +65,22 @@ db.password=YOUR_PASSWORD
 
 ## 3. Build the Application
 
+**Linux / macOS**
+
 ```bash
-mvn clean package -q
+./gradlew shadowJar
+```
+
+**Windows**
+
+```bat
+gradlew.bat shadowJar
 ```
 
 This produces a fat JAR at:
 
 ```
-target/sgbd-lab1-1.0-SNAPSHOT-jar-with-dependencies.jar
+build/libs/sgbd-lab1-1.0-SNAPSHOT.jar
 ```
 
 ---
@@ -80,13 +88,22 @@ target/sgbd-lab1-1.0-SNAPSHOT-jar-with-dependencies.jar
 ## 4. Run the Application
 
 ```bash
-java -jar target/sgbd-lab1-1.0-SNAPSHOT-jar-with-dependencies.jar
+java -jar build/libs/sgbd-lab1-1.0-SNAPSHOT.jar
 ```
 
-Or from source during development:
+Or run directly during development (builds and runs in one step):
+
+**Linux / macOS**
 
 ```bash
-mvn exec:java -Dexec.mainClass=com.sgbd.Main
+./gradlew shadowJar && java -jar build/libs/sgbd-lab1-1.0-SNAPSHOT.jar
+```
+
+**Windows**
+
+```bat
+gradlew.bat shadowJar
+java -jar build\libs\sgbd-lab1-1.0-SNAPSHOT.jar
 ```
 
 ---
@@ -125,7 +142,11 @@ mvn exec:java -Dexec.mainClass=com.sgbd.Main
 
 ```
 SGBD-/
-├── pom.xml                         Maven build file
+├── build.gradle                    Gradle build file
+├── settings.gradle                 Gradle project settings
+├── gradlew                         Gradle wrapper script (Linux/macOS)
+├── gradlew.bat                     Gradle wrapper script (Windows)
+├── gradle/                         Gradle wrapper binaries
 ├── sql/
 │   └── schema.sql                  DB schema + sample data
 ├── src/main/
